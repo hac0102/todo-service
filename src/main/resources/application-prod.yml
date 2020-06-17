@@ -1,0 +1,14 @@
+#/Users/hachangjin/IdeaProjects/todo-service
+server:
+  port: 100100
+  tomcat:
+    accesslog:
+      directory: /home/hac/project/todo/tomcatLogs
+      enabled: true
+      file-date-format: .yyyy-MM-dd
+      max-days: 14
+      pattern: '%h %l %u %t "%r" %s %b %D'
+      prefix: test_access
+      rotate: true
+      suffix: .log
+    basedir: /home/hac/project/todo/tomcatLogs
