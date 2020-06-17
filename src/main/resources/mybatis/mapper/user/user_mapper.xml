@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hac.todo.domain.user.UserMapper">
+
+    <select id="selectUserList" resultType="com.hac.todo.web.dto.user.UserDto">
+<!--        private long id;-->
+<!--        private String name;-->
+<!--        private String emailAddr;-->
+<!--        private String role;-->
+<!--        private String joinType;-->
+        select
+            id,
+            name,
+            email_addr,
+            join_type,
+            user_role
+        from
+            user_info
+    </select>
+
+    <select id="selectUserInfo" resultType="com.hac.todo.web.dto.user.UserDto" parameterType="com.hac.todo.web.dto.user.UserDto">
+        select
+            id,
+            name,
+            email_addr,
+            join_type,
+            user_role
+        from
+            user_info
+        where
+            email_addr = #{emailAddr}
+    </select>
+
+<!--    <insert id="insertUserJoin" parameterType="com.hac.todo.web.dto.user.UserDto" useGeneratedKeys="true" keyColumn="id" keyProperty="id">-->
+    <insert id="insertUserJoin" parameterType="com.hac.todo.web.dto.user.UserDto">
+        INSERT INTO user_info (
+            name
+            , email_addr
+            , join_type
+            , user_role
+            , picture
+        ) VALUES (
+            #{name}
+            , #{emailAddr}
+            , #{joinType}
+            , #{userRole}
+            , #{picture}
+        )
+        ON DUPLICATE KEY UPDATE
+            email_addr = #{emailAddr}
+        <selectKey keyProperty="id" resultType="long" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="insertUserJoinHistory" parameterType="com.hac.todo.web.dto.user.UserDto">
+        INSERT INTO user_login_history (
+            name
+            , email_addr
+            , join_type
+            , user_role
+            , frst_reg_date
+            , last_chg_date
+        ) VALUES (
+            #{name}
+            , #{emailAddr}
+            , #{joinType}
+            , #{userRole}
+            , now()
+            , now()
+        )
+    </insert>
+</mapper>
