@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:insert="layout/layout :: f_header"></th:block>
+    <link rel="stylesheet" href="/css/custom.css">
+    <body>
+        <h1>todo 메인 페이지</h1>
+        <img class="gb_Ia gbii" th:src="${userInfo.getPicture()}">
+<!--        <h3><span th:text="${userInfo.getName()}"></span></h3>-->
+        <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+
+        <th:block th:insert="layout/layout :: f_footer"></th:block>
+    </body>
+</html>

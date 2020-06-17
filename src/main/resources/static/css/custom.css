@@ -1,0 +1,24 @@
+.gb_Ia {
+    -webkit-background-size: 32px 32px;
+    background-size: 32px 32px;
+    border: 0;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    display: initial;
+    margin: -1px;
+    position: relative;
+    height: 32px;
+    width: 32px;
+    z-index: 0;
+}
+
+.gb_Ia:hover, .gb_Ia:focus {
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.15);
+    box-shadow: 0 1px 0 rgba(0,0,0,.15);
+}
+
+#gb#gb a.gb_D {
+    color: #000;
+    cursor: pointer;
+    text-decoration: none;
+}
