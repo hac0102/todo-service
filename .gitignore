@@ -1,1 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
+.gradle
+.idea
+.DS_Store
+build/
+gradle/
+logs/
+tomcatLogs/
