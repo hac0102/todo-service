@@ -4,10 +4,12 @@ import com.hac.todo.web.dto.user.Role;
 import com.hac.todo.web.dto.user.UserDto;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 
 @Getter
+@Slf4j
 public class OAuthAttributes {
 
     private Map<String, Object> attributes;
@@ -37,6 +39,7 @@ public class OAuthAttributes {
     }
 
     private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes, String registrationId) {
+        log.info("구글 로그인 정보 response :: {}", attributes);
         return OAuthAttributes.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
@@ -49,6 +52,7 @@ public class OAuthAttributes {
 
     private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes, String registrationId) {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+        log.info("네이버 로그인 정보 response :: {}",  response);
 
         return OAuthAttributes.builder()
                 .name((String) response.get("name"))
