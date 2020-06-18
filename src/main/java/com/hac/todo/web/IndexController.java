@@ -2,6 +2,7 @@ package com.hac.todo.web;
 
 import com.hac.todo.config.auth.LoginUser;
 import com.hac.todo.config.auth.dto.SessionUser;
+import com.hac.todo.web.dto.user.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,19 +20,28 @@ public class IndexController {
 
     @GetMapping("/")
     public ModelAndView index(ModelAndView mv, @LoginUser SessionUser user) throws Exception {
-//        log.info("user name :: {}", user.getName());
-//        log.info("user email :: {}", user.getEmail());
-//        log.info("user picture :: {}", user.getPicture());
 
         if(user == null){
             mv.setViewName("login");
             return mv;
         }
 
-
         mv.addObject("userInfo", user);
         mv.setViewName("main");
 
         return mv;
     }
+
+    @GetMapping("/logout2")
+    public ModelAndView logout(ModelAndView mv, @LoginUser SessionUser user){
+        log.info("로그아웃 name :: {}", user.getName());
+        log.info("로그아웃 email :: {}", user.getEmail());
+        httpSession.removeAttribute("user");
+        httpSession.setAttribute("user", null);
+        user = null;
+        mv.setViewName("login");
+        return mv;
+    }
+
+
 }

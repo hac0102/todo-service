@@ -1,9 +1,10 @@
 # Created by .ignore support plugin (hsz.mobi)
 .gradle
 .idea
-.DS_Store
+#.DS_Store
 build/
 gradle/
 logs/
 tomcatLogs/
-application-oauth.properties
+resources/application-oauth.properties
+
