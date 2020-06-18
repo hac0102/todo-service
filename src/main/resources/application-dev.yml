@@ -13,10 +13,9 @@ server:
       suffix: .log
     basedir: /home/hac/project/todo/tomcatLogs
 
-#mysql : 121.169.7.171:33306
 spring:
   datasource:
-    url: jdbc:log4jdbc:mysql://121.169.7.171:33306/todo?characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:log4jdbc:mysql://192.168.0.10:3306/todo?characterEncoding=UTF-8&serverTimezone=UTC
     username: todo
     password: gkckdwls12#$A
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
