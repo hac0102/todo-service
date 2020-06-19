@@ -34,10 +34,11 @@ public class IndexController {
 
     @GetMapping("/logout2")
     public ModelAndView logout(ModelAndView mv, @LoginUser SessionUser user){
-        log.info("로그아웃 name :: {}", user.getName());
-        log.info("로그아웃 email :: {}", user.getEmail());
+        log.info("로그아웃 name :: {}", user == null ? "null" : user.getName());
+        log.info("로그아웃 email :: {}", user == null ? "null" : user.getEmail());
+
+//        httpSession.setAttribute("user", null);
         httpSession.removeAttribute("user");
-        httpSession.setAttribute("user", null);
         user = null;
         mv.setViewName("login");
         return mv;
