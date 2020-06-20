@@ -133,6 +133,7 @@ div.wraptest{
 div.box {
     padding: 10px;
     margin: 5px;
+    margin-bottom : 35px !important;
     /*text-align: center;*/
 }
 
@@ -198,6 +199,10 @@ div.box {
 
 .do{
     color: red !important;
+}
+
+.done{
+    color: green !important;
 }
 
 .li_content_box{

@@ -45,7 +45,7 @@
                             <button id="todoAddBtn" class="addTask">입력</button>
                         </div>
                         <div class="boxC" style="margin-top: 55px;">
-                            <span class="sub_title">할 일</span>
+<!--                            <span class="sub_title">할 일</span>-->
                             <div class="list-group" id="todoList">
                                 <ul class="list-group list-group-flush">
                                     <th:block th:each="todo : ${todoList}">
@@ -64,10 +64,35 @@
 
                     <div class="box boxC">
                         <span class="sub_title">하는중</span>
+                        <div class="list-group" id="doingList">
+                            <ul class="list-group list-group-flush">
+                                <th:block th:each="doing : ${doingList}">
+                                    <div class="li_content_box">
+                                        <li class="list-group-item li_border_box">
+                                            <button class="check_btn done" th:chkno="${doing.no}">v</button>
+                                            <span class="li_content" th:text="${doing.title}"></span>
+                                            <button class="del_btn do" th:chkno="${doing.no}">x</button>
+                                        </li>
+                                    </div>
+                                </th:block>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="box boxC">
                         <span class="sub_title">다함</span>
+                        <div class="list-group" id="doneList">
+                            <ul class="list-group list-group-flush">
+                                <th:block th:each="done : ${doneList}">
+                                    <div class="li_content_box">
+                                        <li class="list-group-item li_border_box">
+                                            <span class="li_content" th:text="${done.title}"></span>
+                                            <button class="del_btn do" th:chkno="${done.no}">x</button>
+                                        </li>
+                                    </div>
+                                </th:block>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -84,6 +109,7 @@
             /*<![CDATA[*/
             var userInfo = /*[[ ${userInfo} ]]*/;
             var todoList = /*[[ ${todoList} ]]*/;
+            var doingList = /*[[ ${doingList} ]]*/;
             /*]]*/
         </script>
         <script src="/js/todo/main.js"></script>
