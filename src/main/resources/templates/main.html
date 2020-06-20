@@ -1,13 +1,92 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
     <th:block th:insert="layout/layout :: f_header"></th:block>
     <link rel="stylesheet" href="/css/custom.css">
-    <body>
-        <h1>todo 메인 페이지</h1>
-        <img class="gb_Ia gbii" th:src="${userInfo.getPicture()}">
-<!--        <h3><span th:text="${userInfo.getName()}"></span></h3>-->
-        <a href="/logout2" class="btn btn-info active" role="button">Logout</a>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
 
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+</head>
+    <body class="text-center" id="body">
+        <div class="cover-container d-flex w-100 h-100 mx-auto flex-column">
+            <header class="masthead mb-auto">
+                <div class="inner">
+                    <h3 class="masthead-brand">To Do List</h3>
+                    <span class="nav nav-masthead justify-content-center" style="margin-top: 1rem; margin-right: 2rem;">
+                        <img class="gb_Ia gbii" th:src="${userInfo.getPicture()}">
+                        <p class="usernamecss" th:text="|${userInfo.getName() == null ? '' : userInfo.getName()} 님|"></p>
+                        <a style="margin-left: 3rem; width: 77px; height: 34px; padding: 0.275rem 0.75rem;" href="/logout2" class="btn btn-info active" role="button">Logout</a>
+                    </span>
+                </div>
+            </header>
+            <main role="main" class="inner cover">
+                <div style="margine-bottom:10px;">
+                    <h4 id="clock"></h4>
+                </div>
+
+                <div class="wraptest">
+                    <div class="box boxC">
+                        <span class="sub_title">할일 등록</span>
+                        <div class="enter-task">
+                            <input id="todoTitle" type="text" placeholder="할 일을 입력하세요" class="custom_input" autofocus="true" required="required">
+                            <button id="todoAddBtn" class="addTask">입력</button>
+                        </div>
+                        <div class="boxC" style="margin-top: 55px;">
+                            <span class="sub_title">할 일</span>
+                            <div class="list-group" id="todoList">
+                                <ul class="list-group list-group-flush">
+                                    <th:block th:each="todo : ${todoList}">
+                                        <div class="li_content_box">
+                                            <li class="list-group-item li_border_box">
+                                                <button class="check_btn doing" th:chkno="${todo.no}">v</button>
+                                                <span class="li_content" th:text="${todo.title}"></span>
+                                                <button class="del_btn do" th:chkno="${todo.no}">x</button>
+                                            </li>
+                                        </div>
+                                    </th:block>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box boxC">
+                        <span class="sub_title">하는중</span>
+                    </div>
+
+                    <div class="box boxC">
+                        <span class="sub_title">다함</span>
+                    </div>
+                </div>
+
+            </main>
+
+<!--            <footer class="mastfoot mt-auto">-->
+<!--                <div class="inner">-->
+<!--                    <p>Cover template for Bootstrap</p>-->
+<!--                </div>-->
+<!--            </footer>-->
+        </div>
         <th:block th:insert="layout/layout :: f_footer"></th:block>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var userInfo = /*[[ ${userInfo} ]]*/;
+            var todoList = /*[[ ${todoList} ]]*/;
+            /*]]*/
+        </script>
+        <script src="/js/todo/main.js"></script>
+        <script src="/js/todo/todo.js"></script>
     </body>
 </html>
