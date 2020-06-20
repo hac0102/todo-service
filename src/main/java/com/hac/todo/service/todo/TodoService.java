@@ -45,7 +45,7 @@ public class TodoService {
 
         List<TodoListResponseDto> todoListResponseDtoList = todoMapper.selectTodoList()
             .stream()
-            .filter(list -> list.getId() == id && "N".equals(list.getDelYn()))
+            .filter(list -> list.getId() == id && "N".equals(list.getDelYn()) && "todo".equals(list.getState()))
             .collect(Collectors.toList());
 
         return todoListResponseDtoList;

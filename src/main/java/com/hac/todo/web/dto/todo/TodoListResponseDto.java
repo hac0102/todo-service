@@ -13,14 +13,16 @@ public class TodoListResponseDto {
     private String title;
     private String content;
     private String delYn;
+    private String state;
 
     @Builder
-    public TodoListResponseDto(long no, long id, String title, String content, String delYn){
+    public TodoListResponseDto(long no, long id, String title, String content, String state, String delYn){
         this.no = no;
         this.id = id;
         this.title = title;
         this.content = content;
         this.delYn = delYn;
+        this.state = state;
     }
 
 
