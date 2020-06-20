@@ -7,12 +7,18 @@
         insert into todo_base(
             id,
             title,
+            state,
+            start_date,
+            end_date,
             del_yn,
             frst_reg_date,
             last_chg_date
         )values(
             #{id},
             #{title},
+            'todo',
+            now(),
+            now(),
             'N',
             now(),
             now()
