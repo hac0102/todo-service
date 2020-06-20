@@ -27,7 +27,9 @@ public class IndexController {
             mv.setViewName("login");
             return mv;
         }
-        mv.addObject("todoList", todoService.getTodoList(user));
+        mv.addObject("todoList", todoService.getTodoList(user, "todo"));
+        mv.addObject("doingList", todoService.getTodoList(user, "doing"));
+        mv.addObject("doneList", todoService.getTodoList(user, "done"));
         mv.addObject("userInfo", user);
         mv.setViewName("main");
 

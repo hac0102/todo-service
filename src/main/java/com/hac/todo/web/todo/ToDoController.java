@@ -4,19 +4,13 @@ package com.hac.todo.web.todo;
 import com.hac.todo.config.auth.LoginUser;
 import com.hac.todo.config.auth.dto.SessionUser;
 import com.hac.todo.service.todo.TodoService;
-import com.hac.todo.web.dto.todo.TodoAddRequestDto;
-import com.hac.todo.web.dto.todo.TodoListResponseDto;
+import com.hac.todo.web.dto.todo.TodoRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -28,12 +22,25 @@ public class ToDoController {
 
     @PostMapping("/api/v1/todo")
     public ResponseEntity<?> insertTodo(@LoginUser SessionUser user,
-                                     @RequestBody TodoAddRequestDto todoAddRequestDto,
-                                     ModelAndView mv){
+                                     @RequestBody TodoRequestDto todoRequestDto){
 
-        int affectRow = todoService.insertTodo(user, todoAddRequestDto);
+        int affectRow = todoService.insertTodo(user, todoRequestDto);
         log.info("insertTodo affectRow :: {}", affectRow);
 
-      return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/api/v1/todo")
+    public ResponseEntity<?> updateTodoState(@RequestBody TodoRequestDto todoRequestDto){
+        int affectRow = todoService.todoUpdateState(todoRequestDto);
+        log.info("updateTodoState affectRow :: {}", affectRow);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/v1/todo")
+    public ResponseEntity<?> deleteTodoState(@RequestBody TodoRequestDto todoRequestDto){
+        int affectRow = todoService.deleteTodoState(todoRequestDto);
+        log.info("Delete TodoState affectRow :: {}", affectRow);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
