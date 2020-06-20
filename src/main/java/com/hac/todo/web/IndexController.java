@@ -2,6 +2,7 @@ package com.hac.todo.web;
 
 import com.hac.todo.config.auth.LoginUser;
 import com.hac.todo.config.auth.dto.SessionUser;
+import com.hac.todo.service.todo.TodoService;
 import com.hac.todo.web.dto.user.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final HttpSession httpSession;
+    private final TodoService todoService;
 
     @GetMapping("/")
     public ModelAndView index(ModelAndView mv, @LoginUser SessionUser user) throws Exception {
@@ -25,7 +27,7 @@ public class IndexController {
             mv.setViewName("login");
             return mv;
         }
-
+        mv.addObject("todoList", todoService.getTodoList(user));
         mv.addObject("userInfo", user);
         mv.setViewName("main");
 

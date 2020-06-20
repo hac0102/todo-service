@@ -11,8 +11,9 @@ public interface UserMapper {
 
     List<UserDto> selectUserList();
 
-//    UserDto selectUserInfo(UserDto toEntity);
-    Optional<UserDto> selectUserInfo(UserDto toEntity);
+    UserDto selectUserInfo(String email);
+
+//    Optional<UserDto> selectUserInfo(UserDto toEntity);
 
     long insertUserJoin(UserDto toEntity);
 

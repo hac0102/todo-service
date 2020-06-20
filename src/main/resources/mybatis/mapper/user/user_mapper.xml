@@ -19,7 +19,7 @@
             user_info
     </select>
 
-    <select id="selectUserInfo" resultType="com.hac.todo.web.dto.user.UserDto" parameterType="com.hac.todo.web.dto.user.UserDto">
+    <select id="selectUserInfo" resultType="com.hac.todo.web.dto.user.UserDto" parameterType="String">
         select
             id,
             name,
@@ -29,7 +29,7 @@
         from
             user_info
         where
-            email_addr = #{emailAddr}
+            email_addr = #{email}
     </select>
 
 <!--    <insert id="insertUserJoin" parameterType="com.hac.todo.web.dto.user.UserDto" useGeneratedKeys="true" keyColumn="id" keyProperty="id">-->

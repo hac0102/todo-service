@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hac.todo.domain.todo.TodoMapper">
+
+    <insert id="insertTodo" parameterType="com.hac.todo.web.dto.todo.TodoAddRequestDto">
+        insert into todo_base(
+            id,
+            title,
+            del_yn,
+            frst_reg_date,
+            last_chg_date
+        )values(
+            #{id},
+            #{title},
+            'N',
+            now(),
+            now()
+        )
+    </insert>
+
+    <select id="selectTodoList" resultType="com.hac.todo.web.dto.todo.TodoListResponseDto">
+        select
+            no,
+            id,
+            title,
+            content,
+            del_yn
+        from
+            todo_base
+        order by frst_reg_date desc
+    </select>
+</mapper>
