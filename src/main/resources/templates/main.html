@@ -49,7 +49,7 @@
                             <div class="list-group" id="todoList">
                                 <ul class="list-group list-group-flush">
                                     <th:block th:each="todo : ${todoList}">
-                                        <div class="li_content_box">
+                                        <div class="li_content_box" th:no="${todo.no}">
                                             <li class="list-group-item li_border_box">
                                                 <button class="check_btn doing" th:chkno="${todo.no}">v</button>
                                                 <span class="li_content" th:text="${todo.title}"></span>
@@ -67,7 +67,7 @@
                         <div class="list-group" id="doingList">
                             <ul class="list-group list-group-flush">
                                 <th:block th:each="doing : ${doingList}">
-                                    <div class="li_content_box">
+                                    <div class="li_content_box" th:no="${doing.no}">
                                         <li class="list-group-item li_border_box">
                                             <button class="check_btn done" th:chkno="${doing.no}">v</button>
                                             <span class="li_content" th:text="${doing.title}"></span>
@@ -84,7 +84,7 @@
                         <div class="list-group" id="doneList">
                             <ul class="list-group list-group-flush">
                                 <th:block th:each="done : ${doneList}">
-                                    <div class="li_content_box">
+                                    <div class="li_content_box" th:no="${done.no}">
                                         <li class="list-group-item li_border_box">
                                             <span class="li_content" th:text="${done.title}"></span>
                                             <button class="del_btn do" th:chkno="${done.no}">x</button>
@@ -95,8 +95,50 @@
                         </div>
                     </div>
                 </div>
-
             </main>
+
+            <div class="dim-layer" id="todoDetailPopup">
+                <div class="dimBg"></div>
+                <div id="layer2" class="pop-layer">
+                    <div class="pop-container">
+                        <th:block th:if="${todoDetail} != null">
+                        <div class="pop-conts">
+                            <form id="popupFormData" onsubmit="return false;">
+                            <!--content //-->
+                                <input type="hidden" id="no" th:value="${todoDetail.no}" />
+                                <span style="margin-bottom:10px !important; display: inline-flex !important;" class="ctxt mb20" th:text="${todoDetail.title}"></span>
+                                <span>
+                                    <select class="todo_select_box" id="todoStateSelectBox">
+                                        <option value="todo" th:selected="${todoDetail.state} == 'todo'">할일</option>
+                                        <option value="doing" th:selected="${todoDetail.state} == 'doing'">하는중</option>
+                                        <option value="done" th:selected="${todoDetail.state} == 'done'">다함</option>
+                                    </select>
+                                </span>
+                                <div>
+                                    <textarea style="width:98%;" id="todoContent" th:text="${todoDetail.content}"></textarea>
+                                </div>
+                                <div>
+                                    <label for="startDate">시작일</label>
+                                    <input type="date" name="startDate" id="startDate" th:value="${todoDetail.startDate}" />
+                                    <input type="time" name="startTime" id="startTime" th:value="${todoDetail.startTime}" />
+                                    <br/>
+                                    <label for="endDate">끝난일</label>
+                                    <input type="date" name="endDate" id="endDate" th:value="${todoDetail.endDate}" />
+                                    <input type="time" name="endTime" id="endTime" th:value="${todoDetail.endTime}" />
+                                </div>
+                            </form>
+
+                            <div class="btn-r">
+                                <a href="#" id="todoDetailSaveBtn" class="btn-layerSave">저장</a>
+                                <a href="#" class="btn-layerClose">닫기</a>
+                            </div>
+                            <!--// content-->
+                        </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+
 
 <!--            <footer class="mastfoot mt-auto">-->
 <!--                <div class="inner">-->

@@ -20,12 +20,23 @@ var todo = {
         $('.check_btn.done').on('click', function(){
             var no = $(this).attr('chkno');
             _this.todoUpdate(no, "done");
-        })
+        });
 
         $('.del_btn.do').on('click', function(){
             var no = $(this).attr('chkno');
             _this.todoDelete(no);
-        })
+        });
+
+        $('.li_content_box').dblclick(function(e){
+            var no = $(this).attr('no');
+            _this.todoGetDetail(no, "#todoDetailPopup");
+        });
+
+        $('#todoTitle').on('keydown', function(e){
+            if(e.keyCode == 13){
+                $('#todoAddBtn').click();
+            }
+        });
     },
 
     todoAdd : function () {
@@ -80,9 +91,64 @@ var todo = {
         }).fail(function(error){
             console.log("todo delete error :: ", JSON.stringify(error));
         })
+    },
 
+    todoGetDetail : function (no, el) {
+        $.ajax({
+            type : 'GET',
+            url : '/api/v1/todo/' + no,
+            contentType : 'application/json; charset=utf-8',
+        }).done(function(response){
+            $(el).replaceWith(response);
+            openTodoDetailPopup(el);
+        }).fail(function(){
+
+        })
     }
 };
+
+function openTodoDetailPopup(el){
+    var $el = $(el);		//레이어의 id를 $el 변수에 저장
+    var isDim = $el.prev().hasClass('dimBg');	//dimmed 레이어를 감지하기 위한 boolean 변수
+
+    isDim ? $('.dim-layer').fadeIn() : $el.fadeIn();
+
+    var $elWidth = ~~($el.outerWidth()),
+        $elHeight = ~~($el.outerHeight()),
+        docWidth = $(document).width(),
+        docHeight = $(document).height();
+    // 화면의 중앙에 레이어를 띄운다.
+    if ($elHeight < docHeight || $elWidth < docWidth) {
+        $el.css({
+            marginTop: -$elHeight /2,
+            marginLeft: -$elWidth/2
+        })
+    } else {
+        $el.css({top: 0, left: 0});
+    }
+
+    $el.find('a.btn-layerClose').click(function(){
+        isDim ? $('.dim-layer').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+        return false;
+    });
+
+    $el.find('a.btn-layerSave').click(function(){
+        alert("아직 안만들었따");
+//        $.ajax({
+//
+//        })
+//        isDim ? $('.dim-layer').fadeOut() : $el.fadeOut();
+//        return false;
+    });
+
+
+
+    $('.layer .dimBg').click(function(){
+        $('.dim-layer').fadeOut();
+        return false;
+    });
+
+}
 
 function inputBoxCssChange(el){
     var title = $('#' + el).val();
