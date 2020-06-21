@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,5 +43,13 @@ public class ToDoController {
         int affectRow = todoService.deleteTodoState(todoRequestDto);
         log.info("Delete TodoState affectRow :: {}", affectRow);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/api/v1/todo/{no}")
+    public ModelAndView getTodoDetailData(@PathVariable long no, ModelAndView mv){
+        log.info("디디디ㅣ디딛테테테ㅔ텥이이이ㅣㅇㄹㄹ 값 :: ", no);
+        mv.addObject("todoDetail", todoService.getTodoDetailData(no));
+        mv.setViewName("main :: #todoDetailPopup");
+        return mv;
     }
 }

@@ -56,4 +56,21 @@
             no = #{no}
     </update>
 
+    <select id="selectTodoDetailData" parameterType="long" resultType="com.hac.todo.web.dto.todo.TodoDetailResponseDto">
+        select
+            no,
+            id,
+            title,
+            content,
+            state,
+            date_format(start_date, '%Y-%m-%d') start_date,
+            date_format(end_date, '%Y-%m-%d') end_date,
+            date_format(start_date, '%H:%i') start_time,
+            date_format(end_date, '%H:%i') end_time
+        from
+            todo_base
+        where
+            no = #{no}
+    </select>
+
 </mapper>

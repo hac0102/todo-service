@@ -4,13 +4,16 @@ package com.hac.todo.service.todo;
 import com.hac.todo.config.auth.dto.SessionUser;
 import com.hac.todo.domain.todo.TodoMapper;
 import com.hac.todo.domain.user.UserMapper;
+import com.hac.todo.web.dto.todo.TodoDetailResponseDto;
 import com.hac.todo.web.dto.todo.TodoRequestDto;
 import com.hac.todo.web.dto.todo.TodoListResponseDto;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,5 +64,9 @@ public class TodoService {
 
     private long getUserId(String email) {
         return userMapper.selectUserInfo(email).getId();
+    }
+
+    public TodoDetailResponseDto getTodoDetailData(long no) {
+        return todoMapper.selectTodoDetailData(no);
     }
 }
