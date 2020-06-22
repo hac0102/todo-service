@@ -1,8 +1,3 @@
-console.log("todo js");
-console.log("ususususus ::: ", userInfo);
-console.log("todoList  ::: ", todoList);
-console.log("doingList  ::: ", doingList);
-
 
 var todo = {
     init : function () {
@@ -101,7 +96,9 @@ var todo = {
         }).done(function(response){
             $(el).replaceWith(response);
             openTodoDetailPopup(el);
-        }).fail(function(){
+        }).fail(function(error){
+            alert("getTodoDetail 상세정보 API 호출 실패");
+            console.log("getTodoDetail :: ", error);
 
         })
     }
@@ -133,15 +130,31 @@ function openTodoDetailPopup(el){
     });
 
     $el.find('a.btn-layerSave').click(function(){
-        alert("아직 안만들었따");
-//        $.ajax({
-//
-//        })
-//        isDim ? $('.dim-layer').fadeOut() : $el.fadeOut();
-//        return false;
+        let sendData = {
+            no : $('#no').val(),
+            state : $('#todoStateSelectBox option:selected').val(),
+            content : $('#todoContent').val(),
+            startDate : $('#startDate').val(),
+            startTime : $('#startTime').val(),
+            endDate : $('#endDate').val(),
+            endTime : $('#endTime').val()
+        };
+
+        $.ajax({
+            type : 'PUT',
+            url : '/api/v1/todoDetail',
+            contentType : 'application/json; charset=utf-8',
+            data : JSON.stringify(sendData)
+        }).done(function(response){
+            window.location.href = "/";
+            isDim ? $('.dim-layer').fadeOut() : $el.fadeOut();
+            return false;
+        }).fail(function(error){
+            console.log("update Detail :: ", JSON.stringify(error));
+            alert("저장 실패");
+            return false;
+        })
     });
-
-
 
     $('.layer .dimBg').click(function(){
         $('.dim-layer').fadeOut();
@@ -161,6 +174,5 @@ function inputBoxCssChange(el){
         return true;
     }
 }
-
 
 todo.init();
