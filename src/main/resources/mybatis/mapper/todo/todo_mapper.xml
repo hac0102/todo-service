@@ -73,4 +73,16 @@
             no = #{no}
     </select>
 
+    <update id="updateTodoDetail" parameterType="com.hac.todo.web.dto.todo.TodoDetailRequestDto">
+        update todo_base
+        set
+            content = #{content},
+            state = #{state},
+            start_date = #{startDate},
+            end_date = #{endDate},
+            last_chg_date = now()
+        where
+            no = #{no}
+    </update>
+
 </mapper>

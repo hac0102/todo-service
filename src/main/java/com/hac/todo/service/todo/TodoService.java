@@ -4,6 +4,7 @@ package com.hac.todo.service.todo;
 import com.hac.todo.config.auth.dto.SessionUser;
 import com.hac.todo.domain.todo.TodoMapper;
 import com.hac.todo.domain.user.UserMapper;
+import com.hac.todo.web.dto.todo.TodoDetailRequestDto;
 import com.hac.todo.web.dto.todo.TodoDetailResponseDto;
 import com.hac.todo.web.dto.todo.TodoRequestDto;
 import com.hac.todo.web.dto.todo.TodoListResponseDto;
@@ -68,5 +69,21 @@ public class TodoService {
 
     public TodoDetailResponseDto getTodoDetailData(long no) {
         return todoMapper.selectTodoDetailData(no);
+    }
+
+    public int updateTodoDetail(TodoDetailRequestDto todoDetailRequestDto) {
+//        todoDetailRequestDto.builder()
+//                .startDate(todoDetailRequestDto.getStartDate())
+//                .endDate(todoDetailRequestDto.getEndDate())
+//                .startTime(todoDetailRequestDto.getStartTime())
+//                .endTime(todoDetailRequestDto.getEndTime())
+//                .build();
+
+        todoDetailRequestDto.setStartDate(todoDetailRequestDto.getStartDate() + " "
+                + todoDetailRequestDto.getStartTime() + ":00");
+        todoDetailRequestDto.setEndDate(todoDetailRequestDto.getEndDate() + " "
+                + todoDetailRequestDto.getEndTime() + ":00");
+
+        return todoMapper.updateTodoDetail(todoDetailRequestDto);
     }
 }

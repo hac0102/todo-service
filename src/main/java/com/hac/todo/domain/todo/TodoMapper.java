@@ -1,5 +1,6 @@
 package com.hac.todo.domain.todo;
 
+import com.hac.todo.web.dto.todo.TodoDetailRequestDto;
 import com.hac.todo.web.dto.todo.TodoDetailResponseDto;
 import com.hac.todo.web.dto.todo.TodoRequestDto;
 import com.hac.todo.web.dto.todo.TodoListResponseDto;
@@ -19,4 +20,6 @@ public interface TodoMapper {
     int deleteTodoState(TodoRequestDto todoRequestDto);
 
     TodoDetailResponseDto selectTodoDetailData(long no);
+
+    int updateTodoDetail(TodoDetailRequestDto todoDetailRequestDto);
 }
